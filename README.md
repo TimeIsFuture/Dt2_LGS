@@ -1,7 +1,7 @@
-<img src=".github/Dt2_LGS-Logo-Horz.svg" width="300" >
+# Dt2_LGS
 
 <div align="center">
-  <img src="./SAandLGS.png"/>
+  <img src="https://repository-images.githubusercontent.com/918944634/f50d80a4-9882-4c00-8c35-12b108c044a1"/>
 </div>
 
 (a) The self-attention enables the pixel embedding interaction. The softmax correlation is computed between pixels. 
@@ -47,5 +47,6 @@ If you use Dt2_LGS in your research or wish to refer to the baseline results pub
   title={LGSNet: Local-Global Semantics Learning Object Detection}, 
   year={2024},
   pages={1-12},
-  doi={10.1109/TMM.2024.3521850}}
+  doi={10.1109/TMM.2024.3521850}
+}
 ```
