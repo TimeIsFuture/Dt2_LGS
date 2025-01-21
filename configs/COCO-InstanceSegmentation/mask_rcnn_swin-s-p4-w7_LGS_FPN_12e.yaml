@@ -1,0 +1,58 @@
+_BASE_: '../Base-RCNN-FPN.yaml'
+MODEL:
+  MASK_ON: True
+  WEIGHTS: 'https://github.com/SwinTransformer/storage/releases/download/v1.0.0/swin_small_patch4_window7_224.pth'
+  PIXEL_STD: [57.375, 57.120, 58.395]
+  BACKBONE:
+    NAME: 'build_lgsnet_fpn_backbone'
+    FREEZE_AT: -1
+  SWIN:
+    STRUCTURE: 'swin_small_patch4_window7_224'
+    OUT_INDICES: (0, 1, 2, 3)
+    PATCH_SIZE: 4
+    WINDOW_SIZE: 7
+    EMBED_DIM: 96
+    MLP_RATIO: 4
+    IN_CHANNELS: 3
+    DEPTHS: [2, 2, 18, 2] 
+    HEADS: [3, 6, 12, 24]
+    DROP_PATH_RATE: 0.2
+    PATCH_NORM: True
+  LGSNET:
+    BACKBONE_NAME: 'swin'
+    IN_FEATURES: ['swin0', 'swin1', 'swin2', 'swin3']
+    OUT_FEATURES: ['swin0', 'swin1', 'swin2', 'swin3']
+    K: 7
+  FPN:
+    IN_FEATURES: ['swin0', 'swin1', 'swin2', 'swin3']
+  ROI_HEADS:
+    SCORE_THRESH_TEST: 0.
+    BATCH_SIZE_PER_IMAGE: 256
+  ROI_BOX_HEAD:
+    POOLER_RESOLUTION: 7
+    POOLER_TYPE: 'ROIAlign'
+    POOLER_SAMPLING_RATIO: 2
+  ROI_MASK_HEAD:
+    POOLER_RESOLUTION: 14
+    POOLER_TYPE: 'ROIAlign'
+    POOLER_SAMPLING_RATIO: 2
+SOLVER:
+  IMS_PER_BATCH: 16
+  USE_GRAD_ACC: True
+  IMS_PER_GPU: 1
+  OPTIMIZER: 'ADAMW'
+  BASE_LR: 0.0001
+  ADAMW_BETAS: (0.9, 0.999)
+  WEIGHT_DECAY: 0.05
+  BASE_LR_LGS: 5e-05
+  WEIGHT_DECAY_LGS: 0.05
+  WARMUP_ITERS: 1000
+  CHECKPOINT_PERIOD: 10000
+  STEPS: (60000, 80000)
+  MAX_ITER: 90000
+INPUT:
+  MIN_SIZE_TRAIN: (800, )
+  MAX_SIZE_TRAIN: 1333
+  MIN_SIZE_TEST: 800
+  MAX_SIZE_TEST: 1333
+OUTPUT_DIR: './mask_rcnn_swin-s-p4-w7_LGS_FPN_12e'
