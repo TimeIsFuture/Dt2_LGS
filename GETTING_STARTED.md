@@ -13,8 +13,7 @@ This document provides a brief intro of the usage of builtin command-line tools.
 cd demo/
 python demo.py --config-file ../configs/COCO-Detection/faster_rcnn_R_50_LGS_FPN_6e.yaml \
   --input input1.jpg input2.jpg \
-  [--other-options]
-  --opts MODEL.WEIGHTS /path/to/checkpoint_file
+  [--other-options] --opts MODEL.WEIGHTS /path/to/checkpoint_file
 ```
 The configs are made for training, therefore we need to specify `MODEL.WEIGHTS` to a model from model zoo for evaluation.
 
