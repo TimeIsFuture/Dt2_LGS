@@ -13,8 +13,8 @@ gcc & g++ ≥ 5 are required. [ninja](https://ninja-build.org/) is recommended f
 After having them, run:
 ```
 # install it from a local clone:
-git clone https://github.com/TimeIsFuture/detectron2_LGS.git
-python -m pip install -e detectron2_LGS
+git clone https://github.com/TimeIsFuture/Dt2_LGS.git
+python -m pip install -e Dt2_LGS
 ```
 
 To __rebuild__ Dt2_LGS that's built from a local clone, use `rm -rf build/ **/*.so` to clean the
